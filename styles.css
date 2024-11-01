@@ -1,0 +1,258 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "General Sans";
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+#cursor{
+    transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    position: absolute;
+    z-index: 99999;
+    border-radius: 50%;
+}
+
+#main{
+    width: 100%;
+    background-color: black;
+}
+
+#home{
+    color: white;
+    width: 100%;
+    height: 110vh;
+    background-color: black;
+}
+
+#nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 40px;
+    color: white
+}
+
+#nav a{
+    text-decoration: none;
+    font-family: "General Sans";
+    font-weight: 900;
+    font-size: 18px ;
+    color: white;
+}
+
+#heading{
+    margin-top: 60px;
+}
+
+.bounding{
+    width:fit-content;
+    overflow: hidden;
+}
+
+.boundingelem{
+    transform: translateY(100%);
+}
+#heading h1{
+    font-size: 10vw;
+    text-transform: uppercase;
+    opacity: .7;
+    line-height: 1;
+    margin-left: 40px;
+}
+
+#heading #second{
+    margin-left: 200px;
+}
+
+.blocktext{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.blocktext h4{
+    text-align: right;
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+#heading2{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-top: 110px;
+    padding-right: 40px;
+}
+
+#heading2 h5{
+    font-size: 1.1vw;
+    text-align: right;
+    margin-top: 1vw;
+    text-transform: uppercase;
+}
+
+#homefooter{
+    margin-top: 1.1vw;
+    padding: 0 2.9vw;
+    width: 100%; 
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#homefooter a{
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#iconset{
+    display: flex;
+    gap: 3px;
+    color: black;
+    margin-left: 25vw;
+}
+
+#homefooter .circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 55%;
+    background-color: aliceblue;
+    opacity: 0.7;
+}
+
+#homefooter #hf2{
+    margin-left: 10vw;
+}
+
+#page2{
+    padding-right: 10vw;
+    padding-left: 3vw;
+    padding-top: 120px;
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 140vh;
+}
+
+.elem{
+    position: relative;
+    width: 100%;
+    border-top: 1px solid #888;
+    padding: 3vw 3vw;
+    padding-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.elem h3{
+    margin-top: 1vw;
+    opacity: .7;
+    text-transform: uppercase;
+    font-size: 5vw;
+}
+.elem a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+.elem h4{
+    margin-top: 1.5vw;
+}
+#elem3{
+    border-bottom: 1px solid #888;
+}
+
+.elem img{
+    height: 170%;
+    width: 42%;
+    display: none;
+    opacity: 0;
+    z-index: 999;
+    position: absolute;
+}
+
+#about{
+    display: flex;
+    align-items: center;
+    color: #fff;
+    gap: 70px;
+    padding: 14vw 10vw;
+    padding-left: 31vw;
+    width: 100%;
+    background-color: black;
+}
+
+#textabout{
+    padding-bottom: 55px;
+    width: 27rem;
+}
+
+#textabout h5{
+    text-transform: uppercase;
+    opacity: .6;
+    margin-bottom: 10px;
+}
+
+#textabout p{
+    line-height: 1.7;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+#textabout a{
+    padding: 12px 22px;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+#about img{
+    width: 250px;
+    padding-bottom: 110px;
+}
+
+#footer{
+    background-color: black;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+#footerleft{
+    font-size: 20px;
+    font-weight: 900;
+    display: flex;
+    gap: 30px;
+}
+
+#footeright{
+    display: flex;
+    gap: 20px;
+}
+
+#footeright a{
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+}

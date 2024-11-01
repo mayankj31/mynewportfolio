@@ -1,0 +1,8 @@
+smooth scrolling :
+    attach locomotive scroll css code
+    attach locomotive scroll min.js file
+    copy & paste the js code for locomotive-scroll from github
+    link your locomotive css file with your html file
+
+gsap
+scrolltrigger
