@@ -1,8 +1,10 @@
+//locomotive scrolling feature implemented
 const scroll =new LocomotiveScroll({
     el: document.querySelector('#main'),
     smooth: true
 });
 
+//circular cursor following the mouse pointer
 function mousefollower() {
     window.addEventListener("mousemove",function(dets){
         document.querySelector("#cursor").style.transform = `translate(${dets.clientX}px, ${dets.clientY}px)`;
