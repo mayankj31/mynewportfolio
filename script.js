@@ -183,6 +183,7 @@ document.querySelectorAll(".elem").forEach(function(elem){
     });
 });
 
+//fuctionality for dropdown
 document.addEventListener('DOMContentLoaded', function() {
     const dropdownTrigger = document.querySelector('.dropdown-trigger');
     const dropdownContent = document.querySelector('.dropdown-content');
