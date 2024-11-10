@@ -1,7 +1,20 @@
 //locomotive scrolling feature implemented
 const scroll =new LocomotiveScroll({
     el: document.querySelector('#main'),
-    smooth: true
+    smooth: true,
+    smartphone: {
+        smooth: true,
+        inertia: 0.8,
+        getDirection: true
+     },
+    tablet: {
+        smooth: true,
+        inertia: 0.8,
+        getDirection: true
+    },
+    reloadOnContextChange: true,
+    multiplier: 1.2, // Adjusting scrolling speed (lower = slower)
+    lerp: 0.05 // Adjusting smoothness (lower = smoother)
 });
 
 //circular cursor following the mouse pointer
@@ -108,6 +121,11 @@ cursorsqueeze();
 document.querySelectorAll(".elem").forEach(function(elem){
     var rotate = 0;
     var diffrot = 0;
+    let touchStartTime = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    // Keep existing mouse events
     elem.addEventListener("mousemove", function(dets){
         var diff = dets.clientY - elem.getBoundingClientRect().top;
         diffrot =  dets.clientX - rotate;
@@ -129,17 +147,15 @@ document.querySelectorAll(".elem").forEach(function(elem){
             ease: Power1
         });
     });
-});
 
-// Mobile touch functionality
-document.querySelectorAll(".elem").forEach(function(elem){
-    // Touch events for mobile
+    // Mobile touch functionality
     elem.addEventListener("touchstart", function(e){
-        e.preventDefault();
+        touchStartTime = Date.now();
         const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+
         const rect = elem.getBoundingClientRect();
-        
-        // Calculate position relative to element
         const relativeX = Math.min(Math.max(0, touch.clientX - rect.left), rect.width);
         const relativeY = Math.min(Math.max(0, touch.clientY - rect.top), rect.height);
         
@@ -152,34 +168,61 @@ document.querySelectorAll(".elem").forEach(function(elem){
             rotate: gsap.utils.clamp(-35, 35, (relativeX / rect.width - 0.5) * 70),
             duration: 0.3
         });
-    });
+    }, { passive: true });
 
     elem.addEventListener("touchmove", function(e){
-        e.preventDefault();
         const touch = e.touches[0];
         const rect = elem.getBoundingClientRect();
         
-        // Calculate position relative to element
-        const relativeX = Math.min(Math.max(0, touch.clientX - rect.left), rect.width);
-        const relativeY = Math.min(Math.max(0, touch.clientY - rect.top), rect.height);
-        
-        gsap.to(elem.querySelector("img"), {
-            opacity: 1,
-            display: 'block',
-            top: relativeY,
-            left: relativeX,
-            ease: Power1,
-            rotate: gsap.utils.clamp(-35, 35, (relativeX / rect.width - 0.5) * 70),
-            duration: 0.3
-        });
-    });
+        // Calculate movement distance
+        const moveX = Math.abs(touch.clientX - touchStartX);
+        const moveY = Math.abs(touch.clientY - touchStartY);
 
-    elem.addEventListener("touchend", function(){
-        gsap.to(elem.querySelector("img"), {
-            opacity: 0,
-            display: 'none',
-            ease: Power1
-        });
+        // If significant movement, prevent click and show image
+        if (moveX > 10 || moveY > 10) {
+            e.preventDefault();
+            const relativeX = Math.min(Math.max(0, touch.clientX - rect.left), rect.width);
+            const relativeY = Math.min(Math.max(0, touch.clientY - rect.top), rect.height);
+            
+            gsap.to(elem.querySelector("img"), {
+                opacity: 1,
+                display: 'block',
+                top: relativeY,
+                left: relativeX,
+                ease: Power1,
+                rotate: gsap.utils.clamp(-35, 35, (relativeX / rect.width - 0.5) * 70),
+                duration: 0.3
+            });
+        }
+    }, { passive: false });
+
+    elem.addEventListener("touchend", function(e){
+        const touchDuration = Date.now() - touchStartTime;
+        const touch = e.changedTouches[0];
+        
+        // Calculate total movement
+        const moveX = Math.abs(touch.clientX - touchStartX);
+        const moveY = Math.abs(touch.clientY - touchStartY);
+
+        // If it was a quick tap without much movement, allow the click
+        if (touchDuration < 200 && moveX < 10 && moveY < 10) {
+            // Don't hide the image immediately to allow click
+            setTimeout(() => {
+                gsap.to(elem.querySelector("img"), {
+                    opacity: 0,
+                    display: 'none',
+                    ease: Power1,
+                    duration: 0.2
+                });
+            }, 100);
+        } else {
+            // Hide image immediately for swipes/longer touches
+            gsap.to(elem.querySelector("img"), {
+                opacity: 0,
+                display: 'none',
+                ease: Power1,
+            });
+        }
     });
 });
 
